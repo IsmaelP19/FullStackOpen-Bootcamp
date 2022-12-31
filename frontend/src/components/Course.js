@@ -4,10 +4,10 @@ import Content from "./Content"
 import Total from "./Total"
 
 const Course = ({courses}) => {
-
-  return (
+  
+  return (  
     <div>
-      <h1>Web development Curriculum</h1>
+      <h1>Web development curriculum</h1>
 
       {courses.map(course => {
         return (
@@ -19,7 +19,10 @@ const Course = ({courses}) => {
         )
       })}
     </div>
+    
   )
+ 
 }
+  
 
 export default Course

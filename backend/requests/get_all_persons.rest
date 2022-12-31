@@ -1,0 +1,7 @@
+GET http://localhost:3001/api/persons
+
+
+
+### get a single person
+
+GET http://localhost:3001/api/persons/2

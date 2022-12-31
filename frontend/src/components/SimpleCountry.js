@@ -2,14 +2,10 @@ import React from "react"
 import Weather from "./Weather"
 
 const SimpleCountry = ({country}) => {
-
-  const capital = country.capital.map(capital => capital).join(', ')
-  
-
   return (
     <div>
     <h1>{country.name.common}</h1>
-    <div>capital {capital}</div>
+    <div>capital {country.capital}</div>
     <div>population {country.population}</div>
     <h2>languages</h2>
     <ul>

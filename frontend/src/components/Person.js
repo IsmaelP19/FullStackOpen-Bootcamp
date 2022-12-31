@@ -7,7 +7,7 @@ const Person = ({person, persons, setPersons}) => {
     if (window.confirm(`Delete ${person.name}?`)) {
       phonebookService
         .remove(person.id)
-        .then(response => {
+        .then(_response => {
           setPersons(persons.filter(p => p.id !== person.id))
         })
     }
