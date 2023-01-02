@@ -1,23 +1,23 @@
 const mongoose = require('mongoose')
 
-const noteSchema = new mongoose.Schema({
-  content: {
+const blogSchema = new mongoose.Schema({
+  title: {
     type: String,
-    minlength: 3,
     required: true
   },
-  date: {
-    type: Date,
+  author: String,
+  url: {
+    type: String,
     required: true
   },
-  important: Boolean,
+  likes: Number,
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   }
 })
 
-noteSchema.set('toJSON', {
+blogSchema.set('toJSON', {
   transform: (_document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString()
     delete returnedObject._id
@@ -25,4 +25,4 @@ noteSchema.set('toJSON', {
   }
 })
 
-module.exports = mongoose.model('Note', noteSchema)
+module.exports = mongoose.model('Blog', blogSchema)
