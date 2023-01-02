@@ -1,8 +1,10 @@
 import React, { useState } from 'react' 
+
+import Notification from './Notification'
 import Filter from './Filter'
 import PersonForm from './PersonForm'
 import Persons from './Persons'
-import Notification from './Notification'
+
 
 
 // TODO: Phonebook
@@ -53,6 +55,7 @@ const App = () => {
 }
 
 
+// Notes
 const App = () => {
 
   const [notes, setNotes] = useState([])

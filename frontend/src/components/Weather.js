@@ -13,7 +13,7 @@ const Weather = ({capital}) => {
       })
   }
   useEffect(hook)
-
+  
   if (weather.length === 0) {
     return (
       <div>

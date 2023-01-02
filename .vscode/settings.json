@@ -1,0 +1,11 @@
+{
+  "liveServer.settings.ChromeDebuggingAttachment": false,
+  "eslint.validate": [
+    "vue",
+    "html",
+    "javascript",
+    "typescript",
+    "javascriptreact",
+    "typescriptreact"
+]
+}

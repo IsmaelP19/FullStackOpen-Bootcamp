@@ -25,9 +25,8 @@ const PersonForm = ({persons, setPersons, setMessage}) => {
             setTimeout(() => {setMessage([])}, 5000)
           })
           .catch(error => {
-            setMessage([`Information of ${person.name} has already been removed from server`, 'error'])
-            setTimeout(() => {setMessage([])}, 5000)
-            setPersons(persons.filter(p => p.id !== person.id))
+            setMessage([error.response.data.error, 'error'])
+            setTimeout(() => {setMessage([])}, 9000)
           })
       }
 
@@ -44,6 +43,11 @@ const PersonForm = ({persons, setPersons, setMessage}) => {
           setNewNumber('')
           setMessage([`Added ${returnedPerson.name}`, 'success'])
           setTimeout(() => {setMessage([])}, 5000)
+        })
+        .catch(error => {
+          setMessage([error.response.data.error, 'error'])
+          setTimeout(() => {setMessage([])}, 9000)
+          console.log(error.response.data)
         })
 
     } else {

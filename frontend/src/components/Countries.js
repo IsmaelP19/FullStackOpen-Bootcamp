@@ -16,7 +16,7 @@ const Countries = ({filter, setFilter}) => {
       })
   }
 
-
+  
   useEffect(hook, [])
 
   const countriesToShow = countries.filter(country => country.name.common.toLowerCase().includes(filter.toLowerCase()))
