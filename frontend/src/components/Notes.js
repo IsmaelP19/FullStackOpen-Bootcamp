@@ -1,12 +1,11 @@
 import React, {useState} from "react"
 import Note from "./Note"
-import Notification from "./Notification"
 import noteService from '../services/notes'
 
-const Notes = ({notes, setNotes}) => {
+const Notes = ({notes, setNotes, setErrorMessage}) => {
 
   const [showAll, setShowAll] = useState(true)
-  const [errorMessage, setErrorMessage] = useState(null)
+  
 
 
   const notesToShow = showAll ? notes : notes.filter(note => note.important)
@@ -30,8 +29,6 @@ const Notes = ({notes, setNotes}) => {
 
   return(
     <div>
-      <h1>Notes</h1>
-      <Notification message={errorMessage} />
       <div>
         <button onClick={toggleImportance}>
           show {showAll ? 'important' : 'all'}
