@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react' 
+import React, { useState, useEffect, useRef } from 'react'
 import blogService from '../services/blogs'
 import Blog from './Blog'
 import LoginForm from './LoginForm'
 import Notification from './Notification'
 import BlogForm from './BlogForm'
+import Togglable from './Togglable'
 
 
 
@@ -34,21 +35,28 @@ const App = () => {
 
   const showBlogs = () => {
     return (
-    blogs.map(blog =>
-      <Blog key={blog.id} blog={blog} />)
+      blogs.sort((a, b) => b.likes - a.likes)
+        .map(blog => <Blog key={blog.id} blog={blog} blogs={blogs} setBlogs={setBlogs} />)
     )
   }
+
+  const blogFormRef = useRef()
 
   return (
     <div>
       <Notification message={message[0]} type={message[1]} />
       <h2>Blogs</h2>
+
       <LoginForm user={user} setUser={setUser} setMessage={setMessage} />
 
       { user !== null &&
-        showBlogs() }
+        <Togglable buttonShow="create new blog" buttonHide="cancel" ref={blogFormRef}>
+          <BlogForm blogs={blogs} setBlogs={setBlogs} user={user} setMessage={setMessage} />
+        </Togglable>
+      }
 
-      { user !== null && <BlogForm blogs={blogs} setBlogs={setBlogs} user={user} setMessage={setMessage} /> }
+      { user !== null && showBlogs() }
+
     </div>
   )
 }
@@ -60,9 +68,9 @@ const App = () => {
   const [persons, setPersons] = useState([])
   const [message, setMessage] = useState([])
 
-  
+
   const [filter, setFilter] = useState('')
-  
+
 
   return (
     <div>
@@ -76,7 +84,7 @@ const App = () => {
       <PersonForm persons={persons} setPersons={setPersons} setMessage={setMessage} />
 
       <h2>Numbers</h2>
-    
+
       <Persons persons={persons} filter={filter} setPersons={setPersons} />
     </div>
   )
@@ -110,7 +118,7 @@ const App = () => {
   const [message, setMessage] = useState([])
   const [user, setUser] = useState(null)
 
-  
+
 
   const hook = () => {
     noteService.getAll()
@@ -137,7 +145,7 @@ const App = () => {
 
       <Notification message={message[0]} type={message[1]} />
       <LoginForm user={user} setUser={setUser} setMessage={setMessage} />
-  
+
       <Notes notes={notes} setNotes={setNotes} />
       <NoteForm notes={notes} setNotes={setNotes} user={user} setMessage={setMessage}/>
       <Footer />

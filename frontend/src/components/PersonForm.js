@@ -1,20 +1,20 @@
-import React, {useState} from "react"
+import React, { useState } from 'react'
 import phonebookService from '../services/phonebook'
 
-const PersonForm = ({persons, setPersons, setMessage}) => {
+const PersonForm = ({ persons, setPersons, setMessage }) => {
 
   const [newNumber, setNewNumber] = useState('')
   const [newName, setNewName] = useState('')
-  
+
 
   const addPerson = (event) => {
     event.preventDefault()
     const person = persons.find(p => p.name === newName)
     const message =`${newName} is already added to phonebook. Replace the old number with a new one?`
     if(person && newNumber !== '') {
-      
+
       if(window.confirm(message)) {
-        const changedPerson = {...person, number: newNumber}
+        const changedPerson = { ...person, number: newNumber }
         phonebookService
           .update(person.id, changedPerson)
           .then(response => {
@@ -62,16 +62,16 @@ const PersonForm = ({persons, setPersons, setMessage}) => {
   return(
     <div>
       <form onSubmit={addPerson}>
-      <div>
+        <div>
         name: <input value={newName} onChange={handlePersonChange}/>
-      </div>
-      <div>
-        number: <input value={newNumber} onChange={handleNumberChange}/>
-      </div>
-      <div>
-        <button type="submit">add</button>
         </div>
-    </form>
+        <div>
+        number: <input value={newNumber} onChange={handleNumberChange}/>
+        </div>
+        <div>
+          <button type="submit">add</button>
+        </div>
+      </form>
     </div>
   )
 }

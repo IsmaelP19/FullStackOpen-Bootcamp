@@ -1,7 +1,7 @@
-import React, {useState} from "react"
+import React, { useState } from 'react'
 import noteService from '../services/notes'
 
-const NoteForm = ({notes, setNotes, user, setMessage}) => {
+const NoteForm = ({ notes, setNotes, user, setMessage }) => {
 
   const [newNote, setNewNote] = useState('')
 
@@ -32,21 +32,21 @@ const NoteForm = ({notes, setNotes, user, setMessage}) => {
 
   const form = () => {
     return(
-    <div>
-      <form onSubmit={addNote}>
-        <input value={newNote} onChange={handleNoteChange} />
-        <button type="submit">save</button>
-      </form>
-    </div>
+      <div>
+        <form onSubmit={addNote}>
+          <input value={newNote} onChange={handleNoteChange} />
+          <button type="submit">save</button>
+        </form>
+      </div>
     )
   }
 
   const formContainer = () => {
     return(
-    <div>
-      <p> {user.name} logged-in</p>
-      {form()}
-    </div>
+      <div>
+        <p> {user.name} logged-in</p>
+        {form()}
+      </div>
     )
   }
 
