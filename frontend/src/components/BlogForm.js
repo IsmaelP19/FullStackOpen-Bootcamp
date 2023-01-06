@@ -1,9 +1,8 @@
-import React from 'react'
-import blogService from '../services/blogs'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-const BlogForm = ({ blogs, setBlogs, user, setMessage }) => {
-  const [newBlog, setNewBlog] = React.useState({
+const BlogForm = ({ user, createBlog }) => {
+  const [newBlog, setNewBlog] = useState({
     title: '',
     author:'',
     url: '',
@@ -11,26 +10,18 @@ const BlogForm = ({ blogs, setBlogs, user, setMessage }) => {
 
   const addBlog = (event) => {
     event.preventDefault()
-    const blogObject = {
+    createBlog({
       title: newBlog.title,
       author: newBlog.author,
       url: newBlog.url,
       likes: 0,
-      user: user.id,
-    }
-
-    blogService.create(blogObject)
-      .then(returnedBlog => {
-        setBlogs(blogs.concat(returnedBlog))
-        setNewBlog({
-          title: '',
-          author: '',
-          url: '',
-        })
-        setMessage([`a new blog ${returnedBlog.title} by ${returnedBlog.author} added`, 'success'])
-        setTimeout(() => { setMessage([]) }, 5000)
-      })
-
+      user: user,
+    })
+    setNewBlog({
+      title: '',
+      author: '',
+      url: '',
+    })
   }
 
   const handleBlogChange = (event) => {
@@ -47,15 +38,15 @@ const BlogForm = ({ blogs, setBlogs, user, setMessage }) => {
         <form onSubmit={addBlog}>
           <div>
             title:
-            <input value={newBlog.title} onChange={handleBlogChange} name="title" />
+            <input id='title' value={newBlog.title} onChange={handleBlogChange} name="title" />
           </div>
           <div>
             author:
-            <input value={newBlog.author} onChange={handleBlogChange} name="author" />
+            <input id='author' value={newBlog.author} onChange={handleBlogChange} name="author" />
           </div>
           <div>
             url:
-            <input value={newBlog.url} onChange={handleBlogChange} name="url" />
+            <input id='url' value={newBlog.url} onChange={handleBlogChange} name="url" />
           </div>
           <button type="submit">save</button>
         </form>
@@ -73,10 +64,8 @@ const BlogForm = ({ blogs, setBlogs, user, setMessage }) => {
 }
 
 BlogForm.propTypes = {
-  blogs: PropTypes.array.isRequired,
-  setBlogs: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
-  setMessage: PropTypes.func.isRequired,
+  createBlog: PropTypes.func.isRequired,
 }
 
 export default BlogForm

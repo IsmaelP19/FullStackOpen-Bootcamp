@@ -42,6 +42,20 @@ const App = () => {
 
   const blogFormRef = useRef()
 
+  const addBlog = (blogObject) => {
+    blogFormRef.current.toggleVisibility()
+    blogService.create(blogObject)
+      .then(returnedBlog => {
+        setBlogs(blogs.concat(returnedBlog))
+        setMessage([`a new blog ${returnedBlog.title} by ${returnedBlog.author} added`, 'success'])
+        setTimeout(() => { setMessage([]) }, 5000)
+      })
+      .catch(error => {
+        setMessage([error.response.data.error, 'error'])
+        setTimeout(() => { setMessage([]) }, 5000)
+      })
+  }
+
   return (
     <div>
       <Notification message={message[0]} type={message[1]} />
@@ -51,7 +65,7 @@ const App = () => {
 
       { user !== null &&
         <Togglable buttonShow="create new blog" buttonHide="cancel" ref={blogFormRef}>
-          <BlogForm blogs={blogs} setBlogs={setBlogs} user={user} setMessage={setMessage} />
+          <BlogForm user={user} createBlog={addBlog} />
         </Togglable>
       }
 
