@@ -4,7 +4,7 @@ const PORT = process.env.PORT
 let MONGODB_URI = process.env.MONGODB_URI_BLOGS
 
 if (process.env.NODE_ENV === 'test') {
-  MONGODB_URI = process.env.MONGODB_URI_BLOGS_TEST
+  MONGODB_URI = process.env.MONGODB_URI_BLOGS
 }
 
 module.exports = {

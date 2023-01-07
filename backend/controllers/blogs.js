@@ -21,7 +21,6 @@ blogsRouter.get('/:id', async (request, response, next) => {
 blogsRouter.post('/', async (request, response, next) => {
   const body = request.body
   const decodedToken = jwt.verify(request.token, process.env.SECRET)
-  // console.log('decodedToken', decodedToken)
   if (!request.token || !decodedToken.id) {
     return response.status(401).json({ error: 'token missing or invalid' })
   }
@@ -49,15 +48,15 @@ blogsRouter.delete('/:id', async (request, response, next) => {
   if (!request.token || !decodedToken.id) {
     return response.status(401).json({ error: 'token missing or invalid' })
   }
-  const user = await User.findById(decodedToken.id)
+
   const blogToDelete = await Blog.findById(request.params.id)
-  if (blogToDelete && blogToDelete.user.toString() === user.id.toString()) {
+  if (blogToDelete) {
     await blogToDelete.remove()
     response.status(204).end()
-  } else if (blogToDelete) {
-    response.status(401).json({ error: 'user not authorized to delete this blog' })
+  // } else if (blogToDelete) {
+  //   response.status(401).json({ error: 'user not authorized to delete this blog' })
   } else {
-    response.status(404).end()
+    response.status(404).json({ error: 'blog not found' })
   }
 })
 
@@ -71,17 +70,18 @@ blogsRouter.put('/:id', async (request, response, next) => {
   }
 
   const blog = {
+    title: body.title,
+    author: body.author,
+    url: body.url,
     likes: body.likes
   }
 
   const blogToUpdate = await Blog.findById(request.params.id)
-  if (blogToUpdate && blogToUpdate.user.toString() === decodedToken.id.toString()) {
-    await blogToUpdate.update(blog)
-    response.json(blogToUpdate)
-  } else if (blogToUpdate) {
-    response.status(401).json({ error: 'user not authorized to update this blog' })
+  if (blogToUpdate) {
+    const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, { new: true })
+    response.json(updatedBlog)
   } else {
-    response.status(404).end()
+    response.status(404).json({ error: 'blog not found' })
   }
 })
 

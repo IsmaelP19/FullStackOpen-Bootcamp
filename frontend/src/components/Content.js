@@ -1,7 +1,7 @@
-import React from "react"
-import Part from "./Part"
+import React from 'react'
+import Part from './Part'
 
-const Content = ({parts}) => {
+const Content = ({ parts }) => {
 
   return (
     <div>

@@ -1,11 +1,11 @@
-import React from "react"
-import Header from "./Header"
-import Content from "./Content"
-import Total from "./Total"
+import React from 'react'
+import Header from './Header'
+import Content from './Content'
+import Total from './Total'
 
-const Course = ({courses}) => {
-  
-  return (  
+const Course = ({ courses }) => {
+
+  return (
     <div>
       <h1>Web development curriculum</h1>
 
@@ -19,10 +19,10 @@ const Course = ({courses}) => {
         )
       })}
     </div>
-    
+
   )
- 
+
 }
-  
+
 
 export default Course

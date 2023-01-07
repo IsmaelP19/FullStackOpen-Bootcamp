@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from "react"
-import axios from "axios"
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 
-const Weather = ({capital}) => {
+const Weather = ({ capital }) => {
   const api_key = process.env.REACT_APP_WEATHER_API_KEY
   const url = `http://api.weatherstack.com/current?access_key=${api_key}&query=${capital}`
   const [weather, setWeather] = useState([])
@@ -13,7 +13,7 @@ const Weather = ({capital}) => {
       })
   }
   useEffect(hook)
-  
+
   if (weather.length === 0) {
     return (
       <div>

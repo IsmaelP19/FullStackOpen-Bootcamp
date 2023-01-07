@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from "react"
-import axios from "axios"
-import MultipleCountries from "./MultipleCountries"
-import SimpleCountry from "./SimpleCountry"
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import MultipleCountries from './MultipleCountries'
+import SimpleCountry from './SimpleCountry'
 
 
-const Countries = ({filter, setFilter}) => {
+const Countries = ({ filter, setFilter }) => {
 
   const [countries, setCountries] = useState([])
 
@@ -16,7 +16,7 @@ const Countries = ({filter, setFilter}) => {
       })
   }
 
-  
+
   useEffect(hook, [])
 
   const countriesToShow = countries.filter(country => country.name.common.toLowerCase().includes(filter.toLowerCase()))
@@ -28,11 +28,11 @@ const Countries = ({filter, setFilter}) => {
       </div>
     )
   }
-  else if (countriesToShow.length > 1) { 
+  else if (countriesToShow.length > 1) {
     return (
-      <MultipleCountries countriesToShow={countriesToShow} filter={filter} setFilter={setFilter}  />
+      <MultipleCountries countriesToShow={countriesToShow} filter={filter} setFilter={setFilter} />
     )
-  } else if (countriesToShow.length === 1) { 
+  } else if (countriesToShow.length === 1) {
     return (
       <SimpleCountry country={countriesToShow[0]}/>
     )

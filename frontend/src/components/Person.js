@@ -1,13 +1,14 @@
-import React from "react"
-import phonebookService from "../services/phonebook"
+import React from 'react'
+import phonebookService from '../services/phonebook'
 
-const Person = ({person, persons, setPersons}) => {
+const Person = ({ person, persons, setPersons }) => {
 
   const handleClick = () => {
     if (window.confirm(`Delete ${person.name}?`)) {
       phonebookService
         .remove(person.id)
-        .then(_response => {
+        // eslint-disable-next-line no-unused-vars
+        .then( () => {
           setPersons(persons.filter(p => p.id !== person.id))
         })
     }
@@ -15,8 +16,8 @@ const Person = ({person, persons, setPersons}) => {
 
   return (
     <div>
-      {person.name} {person.number}      
-      <button style={{margin: '0 0 10px 10px'}} onClick={handleClick}>Delete</button>
+      {person.name} {person.number}
+      <button style={{ margin: '0 0 10px 10px' }} onClick={handleClick}>Delete</button>
     </div>
   )
 }

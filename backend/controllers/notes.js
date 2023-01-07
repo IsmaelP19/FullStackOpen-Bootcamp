@@ -36,6 +36,9 @@ notesRouter.post('/', async (request, response, next) => {
     return response.status(401).json({ error: 'token missing or invalid' })
   }
   const user = await User.findById(decodedToken.id)
+  if (body.content.length < 3) {
+    return response.status(400).json({ error: 'content must be at least 3 characters long' })
+  }
   const note = new Note({
     content: body.content,
     important: body.important || false,
@@ -44,7 +47,8 @@ notesRouter.post('/', async (request, response, next) => {
   })
 
   const savedNote = await note.save()
-  user.notes = user.notes.concat(savedNote._id)
+  console.log('savedNote: ', savedNote)
+  user.notes = user.notes.concat(savedNote) // we have to change the user model to have notes instead of blogs
   await user.save()
 
   response.json(savedNote)
