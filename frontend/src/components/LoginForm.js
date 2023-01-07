@@ -30,10 +30,11 @@ const LoginForm = ({ user, setUser, setMessage }) => {
   }
 
   const form = () => (
-    <form onSubmit={handleLogin}>
+    <form id='loginForm' onSubmit={handleLogin}>
       <div>
           username
         <input
+          id='username'
           type="text"
           value={username}
           name="Username"
@@ -43,13 +44,14 @@ const LoginForm = ({ user, setUser, setMessage }) => {
       <div>
           password
         <input
+          id='password'
           type="password"
           value={password}
           name="Password"
           onChange={({ target }) => setPassword(target.value)}
         />
       </div>
-      <button type="submit">login</button>
+      <button id='loginBtn' type="submit">login</button>
     </form>
   )
 
@@ -68,7 +70,7 @@ const LoginForm = ({ user, setUser, setMessage }) => {
 
   const logoutForm = () => (
     <form onSubmit={handleLogout}>
-      <button type="submit">logout</button>
+      <button id='logoutBtn' type="submit">logout</button>
     </form>
   )
 

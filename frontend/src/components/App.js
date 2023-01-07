@@ -68,8 +68,10 @@ const App = () => {
           <BlogForm user={user} createBlog={addBlog} />
         </Togglable>
       }
+      <div id='blogs'>
+        { user !== null && showBlogs() }
+      </div>
 
-      { user !== null && showBlogs() }
 
     </div>
   )

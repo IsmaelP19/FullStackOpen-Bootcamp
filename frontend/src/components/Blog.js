@@ -27,7 +27,7 @@ const Blog = ({ blog, blogs, setBlogs }) => {
 
 
   return (
-    <div style={blogStyle}>
+    <div className='blog' style={blogStyle}>
       <div>
         <span className='outTogglable'>{blog.title}, by {blog.author}</span>
         <Togglable buttonShow="view" buttonHide="hide">
